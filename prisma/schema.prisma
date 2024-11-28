@@ -2,26 +2,25 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
+datasource db { // 데이터베이스의 연결 정보를 설정
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String      @id @default(cuid())  // 사용자 ID
+  id        String      @id @default(cuid())  // 사용자 ID @id 가 있으므로 이건 기본키이다 , 만약 id 를 입력하지 않으면 자동으로 고유한 값 생성
   name      String   // 사용자 이름
   password  String   // 사용자 비밀번호
-  createdAt DateTime @default(now()) // 사용자 생성시간
-  characters Character[] // 사용자와 연결된 캐릭터
+  createdAt DateTime @default(now()) // 만들어진 날짜
+  characters Character[] // 하나의 유저가 여러개의 게임캐릭터 생성가능
 }
 
 model Character {
-  id        Int      @id @default(autoincrement()) // 캐릭터 ID
   name      String   @unique  // 캐릭터 이름
   health    Int      @default(500) // 체력
   power     Int      @default(100) // 공격력
   money     Int      @default(10000) // 게임머니
   userId    String   // 캐릭터를 만든 사용자 ID
-  user      User     @relation(fields: [userId], references: [id]) // user하고 연결
+  user      User     @relation(fields: [userId], references: [id]) // 두 모델 관에 관계를 정의한다.
 }
 

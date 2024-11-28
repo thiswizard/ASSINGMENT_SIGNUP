@@ -9,6 +9,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "mysql2": "^3.11.4",
+    "prettier": "^3.4.1",
     "prisma": "^5.22.0"
   },
   "devDependencies": {
